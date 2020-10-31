@@ -89,16 +89,16 @@ print("Database Name: " + db_name)
 print("Database User: " + db_user)
 print("Database Password: " + db_password)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': db_name,
-        'USER': db_user,
-        'PASSWORD': db_password,
-        'HOST': db_host,
-        'PORT': db_port
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': db_name,
+#         'USER': db_user,
+#         'PASSWORD': db_password,
+#         'HOST': db_host,
+#         'PORT': db_port
+#     }
+# }
 
 
 # Password validation
