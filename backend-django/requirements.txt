@@ -1,0 +1,7 @@
+django==2.0.1
+sqlparse==0.3.0
+djangorestframework==3.11.0
+django-cors-headers==3.3.0
+psycopg2==2.8.5
+pandas==0.25.3
+uwsgi==2.0.18

@@ -1,0 +1,51 @@
+version: "3.7"
+services:
+
+  db:
+    image: postgres:12.4
+    container_name: ${DB_NAME}
+    hostname: ${DB_HOST}
+    environment:
+        TZ: ${OS_TIMEZONE}
+        POSTGRES_USER: ${DB_USER}
+        POSTGRES_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -d postgres -U postgres"]
+        interval: 10s
+        timeout: 10s
+        retries: 5
+    ports:
+        - ${DB_PORT}:5432
+    networks:
+      - db_network
+
+  admin:
+      image: dockage/phppgadmin
+      depends_on: 
+        - db
+      environment: 
+        PHP_PG_ADMIN_SERVER_HOST: db
+        PHP_PG_ADMIN_SERVER_PORT: ${DB_PORT}
+      ports:
+        - 9000:80
+      networks:
+        - db_network
+
+  django:
+    build: ./backend-django/
+    command: bash -c "python manage.py migrate && uwsgi --socket :8000 --wsgi-file config/wsgi.py"
+    environment: 
+        DB_HOST: ${DB_HOST}
+        DB_PORT: ${DB_PORT}
+        DB_NAME: ${DB_NAME}
+        DB_USER: ${DB_USER}
+        DB_PASSWORD: ${DB_PASSWORD}
+    stdin_open: true
+    depends_on:
+      - db
+    networks:
+      - db_network
+
+networks:
+  db_network:
+    driver: bridge
