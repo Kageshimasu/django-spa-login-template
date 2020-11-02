@@ -31,7 +31,7 @@ services:
 
   django:
     build: ./backend-django/
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && uwsgi --socket :8000 --wsgi-file config/wsgi.py"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && uwsgi --http :8000 --wsgi-file config/wsgi.py -b 32768"
     environment: 
         DB_HOST: db
         DB_PORT: ${DB_PORT}
