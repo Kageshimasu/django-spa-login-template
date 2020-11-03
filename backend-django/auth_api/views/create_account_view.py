@@ -8,6 +8,7 @@ from ..models import CustomUser
 
 
 class CreateAccountView(APIView):
+    permission_classes = ()
 
     @staticmethod
     def post(request):
@@ -25,5 +26,5 @@ class CreateAccountView(APIView):
         if CustomUser.objects.filter(email=email).exists():
             return JsonResponse({'message': 'Email already exists'}, status=403)
         dt = timezone.now()
-        user = CustomUser.objects.create_user(username, email, password, access_datetime=dt)
-        return JsonResponse({'message': 'successfully created account', 'token': user.token})
+        CustomUser.objects.create_user(username, email, password, access_datetime=dt)
+        return JsonResponse({'message': 'successfully created account'})

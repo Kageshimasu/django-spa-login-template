@@ -7,6 +7,7 @@ from ..models import CustomUser
 
 
 class LoginView(APIView):
+    permission_classes = ()
 
     @staticmethod
     def post(request):

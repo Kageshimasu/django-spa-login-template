@@ -9,7 +9,7 @@ jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
 
-class JwtAuthView(APIView):
+class TokenObtainView(APIView):
 
     @staticmethod
     def post(request):
@@ -19,4 +19,4 @@ class JwtAuthView(APIView):
         if not user:
             return Response({'message': 'Incorrect Username or Password'}, status=403)
         payload = jwt_payload_handler(user)
-        return Response({'token': jwt_encode_handler(payload)})
+        return Response({'access': jwt_encode_handler(payload)})
