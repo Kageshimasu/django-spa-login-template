@@ -15,10 +15,12 @@ curl -i -X POST -d "{\"username\":\"admin\", \"email\":\"admin@example.com\",\"p
 
 JWT発行
 ```
- curl http://localhost:8000/auth_api/token -d "username=admin&email=admin@example.com&password=admin"
+curl http://localhost:8000/auth_api/token -d "username=admin&email=admin@example.com&password=admin"
 ```
 
 認証テスト
 ```
- curl -X POST http://localhost:8000/auth_api/hello -H "Authorization: JWT {access token}"
+# FOR WINDOWS
+set TOKEN = ここにアクセストークンのみ書く
+curl -X POST http://localhost:8000/auth_api/hello -H "Authorization: JWT %TOKEN%"
 ```
