@@ -21,6 +21,6 @@ curl http://localhost:8000/auth_api/token -d "username=admin&email=admin@example
 認証テスト
 ```
 # FOR WINDOWS
-set TOKEN=ここにアクセストークンのみ書く
-curl -X POST http://localhost:8000/auth_api/hello -H "Authorization: JWT %TOKEN%"
+set ACCESS=ここにアクセストークンのみ書く
+curl -X POST http://localhost:8000/auth_api/hello -H "Authorization: JWT %ACCESS%"
 ```
